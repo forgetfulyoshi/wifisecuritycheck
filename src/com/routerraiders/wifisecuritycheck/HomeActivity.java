@@ -1,10 +1,10 @@
 package com.routerraiders.wifisecuritycheck;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+import android.view.View;
 
 public class HomeActivity extends Activity {
 
@@ -18,6 +18,10 @@ public class HomeActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_home, menu);
         return true;
+    }
+    
+    public void onStartButtonClick(View view) {
+	this.startActivity(new Intent(this, SummaryActivity.class));
     }
 
     

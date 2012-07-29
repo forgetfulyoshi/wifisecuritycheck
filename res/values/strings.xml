@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">Wifi Security Check</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_home">Begin Check</string>
+    <string name="main_button_start">Start Scan!</string>
+
+</resources>

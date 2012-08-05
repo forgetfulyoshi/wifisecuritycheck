@@ -11,18 +11,36 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+
+
 
 public class SummaryActivity extends ListActivity {
 
+    private ListView mListView;
+    private ArrayAdapter<String> mArrayAdapter;
+    
     @TargetApi(11)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_summary);
-	
+
 	if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
+	
+	mListView = this.getListView();
+	
+	ProgressBar spinner = (ProgressBar) findViewById(R.id.summary_progressBar);
+	mListView.setEmptyView(spinner);
+	
+	mArrayAdapter = new ArrayAdapter<String>(SummaryActivity.this, android.R.layout.simple_list_item_1,
+		android.R.id.text1);
+	
+	mListView.setAdapter(mArrayAdapter);
 
     }
 
@@ -31,7 +49,6 @@ public class SummaryActivity extends ListActivity {
 	super.onResume();
 
 	new AsyncTask<Context, Void, WifiConfiguration>() {
-
 	    @Override
 	    protected WifiConfiguration doInBackground(Context... contexts) {
 		// Get wifi info
@@ -49,7 +66,21 @@ public class SummaryActivity extends ListActivity {
 
 	    @Override
 	    protected void onPostExecute(WifiConfiguration config) {
-		// Add rows to list
+		
+		mArrayAdapter.clear();
+		
+		if (config == null) {    
+		    mArrayAdapter.notifyDataSetChanged();
+		    return;
+		}
+		
+		if (config.allowedProtocols.get(WifiConfiguration.Protocol.RSN)) {
+
+		} else {
+		    mArrayAdapter.add("Open Network");
+		}
+		
+		mArrayAdapter.notifyDataSetChanged();
 	    }
 
 	}.execute(this.getApplicationContext());

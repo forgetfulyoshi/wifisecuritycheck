@@ -1,27 +1,59 @@
 package com.routerraiders.wifisecuritycheck;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Intent;
+import android.app.ListActivity;
+import android.content.Context;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
-public class SummaryActivity extends Activity {
+public class SummaryActivity extends ListActivity {
 
     @TargetApi(11)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_summary);
-	getActionBar().setDisplayHomeAsUpEnabled(true);
+	
+	if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+	    getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
 
-	TextView textView = (TextView) findViewById(R.id.textView1);
-	textView.setText(Html.fromHtml(getString(R.string.warn_open_wifi)));
+    }
+
+    @Override
+    public void onResume() {
+	super.onResume();
+
+	new AsyncTask<Context, Void, WifiConfiguration>() {
+
+	    @Override
+	    protected WifiConfiguration doInBackground(Context... contexts) {
+		// Get wifi info
+
+		WifiManager manager = (WifiManager) contexts[0].getSystemService(WIFI_SERVICE);
+
+		for (WifiConfiguration config : manager.getConfiguredNetworks()) {
+		    if (WifiConfiguration.Status.CURRENT == config.status) {
+			return config;
+		    }
+		}
+
+		return null;
+	    }
+
+	    @Override
+	    protected void onPostExecute(WifiConfiguration config) {
+		// Add rows to list
+	    }
+
+	}.execute(this.getApplicationContext());
+
     }
 
     @Override
@@ -39,9 +71,4 @@ public class SummaryActivity extends Activity {
 	}
 	return super.onOptionsItemSelected(item);
     }
-    
-    public void onTestClick(View v) {
-	this.startActivity(new Intent(this, ExplanationActivity.class));
-    }
-
 }

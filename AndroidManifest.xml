@@ -30,7 +30,7 @@
                 android:value=".HomeActivity" />
         </activity>
         <activity
-            android:name=".ExplanationActivity"
+            android:name=".DetailsActivity"
             android:label="@string/title_activity_explanation" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

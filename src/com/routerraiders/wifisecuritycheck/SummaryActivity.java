@@ -3,6 +3,7 @@ package com.routerraiders.wifisecuritycheck;
 import android.annotation.TargetApi;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -69,7 +71,8 @@ public class SummaryActivity extends ListActivity {
 		
 		mArrayAdapter.clear();
 		
-		if (config == null) {    
+		if (config == null) {
+		    mArrayAdapter.add("Test Network");
 		    mArrayAdapter.notifyDataSetChanged();
 		    return;
 		}
@@ -101,5 +104,10 @@ public class SummaryActivity extends ListActivity {
 	    return true;
 	}
 	return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+	startActivity(new Intent(this, DetailsActivity.class));
     }
 }

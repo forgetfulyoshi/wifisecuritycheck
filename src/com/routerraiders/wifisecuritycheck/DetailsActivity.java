@@ -5,12 +5,17 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
+import android.widget.TextView;
 
 public class DetailsActivity extends Activity {
 
+    private TextView mBottomLine;
+    private TextView mExplanation;
+    private TextView mUses;
+    
     @TargetApi(11)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,8 +26,14 @@ public class DetailsActivity extends Activity {
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
         
-        WebView web = (WebView)this.findViewById(R.id.explanation_webview);
-        web.loadUrl("file:///android_asset/warn_open_wifi.html");
+        mBottomLine = (TextView) findViewById(R.id.detail_bl);
+        mExplanation = (TextView) findViewById(R.id.detail_explain);
+        mUses = (TextView) findViewById(R.id.detail_uses);
+        
+        String[] infoStrings = getResources().getStringArray(R.array.explain_open_wifi);
+        mBottomLine.setText(Html.fromHtml(infoStrings[0]));
+        mExplanation.setText(Html.fromHtml(infoStrings[1]));
+        mUses.setText(Html.fromHtml(infoStrings[2]));
     }
 
     @Override

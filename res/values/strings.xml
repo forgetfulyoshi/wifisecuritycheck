@@ -18,47 +18,34 @@
     <string name="lable_aes">AES</string>
 
     <!-- Instructional strings -->
-    <string name="warn_open_wifi">
-		<![CDATA[
-	    	
-        ]]>
-    </string>
-    
-    <string name="warn_wep">
-		<![CDATA[
-        	<p>
-        	<b>Bottom line:</b> Proceed with caution! This network has minor protection that is easily broken.
-        	</p>
-        ]]>
-    </string>
-    <string name="warn_wps">
-<![CDATA[
-        <p>
-        <b>Bottom line:</b> You are probably safe, but be forewarned. This network can be rather easily hacked.
-        </p>
-        ]]>
-    </string>
-    <string name="warn_wpa">
-<![CDATA[
-        <p>
-        <b>Bottom line:</b> This network uses an excellent form of security. It\'s only real weakness is an easy password - make sure it\'s a good one. 
-        </p>
-        ]]>
-    </string>
-    <string name="warn_tkip">
-<![CDATA[
-        <p>
-        <b>Bottom line:</b> You are most likely perfectly safe. However, this network uses an older form of encryption which has several known vulnerabilities.
-        </p>
-        ]]>
-    </string>
-    <string name="warn_aes">
-<![CDATA[
-        <p>
-        <b>Bottom line:</b> Excellent encryption! AES is quite literally the gold-standard for securing communications.
-        </p>
-        ]]>
-    </string>
+    <string-array name="explain_open_wifi">
+        <item>&lt;b>Bottom line:&lt;/b> Don\'t do anything on this network that you wouldn\'t want someone else seeing.</item>
+        <item>&lt;b>Explanation: &lt;/b>Open networks such as this have no security 
+        	features enabled. This typically means that &lt;b>ALL DATA&lt;/b> is 
+        	readable by anyone nearby.The exception is if you are visiting a web
+			site or service that uses encryption. Web sites that use encryption
+			will always have a URL which begins with \"https\" rather than \"http\".
+			Services will vary by provider - if you are not certain that they use
+			encryption it is usually best to play it safe and wait until you are
+			on a more secure network.</item>
+        <item>This network is safe to use for:&lt;li>General web browsing (news, sports, games)&lt;/li>&lt;li>Viewing encrypted web sites (most email, facebook, etc.)&lt;/li></item>
+    </string-array>
+    <string-array name="explain_wep">
+        <item><b>Bottom line:</b> Proceed with caution! This network has minor protection that is easily broken.</item>
+    </string-array>
+    <string-array name="explain_wps">
+        <item><b>Bottom line:</b> You are probably safe, but be forewarned. This network can be rather easily hacked.</item>
+    </string-array>
+    <string-array name="explain_wpa">
+        <item><b>Bottom line:</b> This network uses an excellent form of security. It\'s only real weakness is an easy password - make sure it\'s a good one. </item>
+    </string-array>
+    <string-array name="explain_tkip">
+        <item><b>Bottom line:</b> You are most likely perfectly safe. However, this network uses an older form of encryption which has several known vulnerabilities. </item>
+    </string-array>
+    <string-array name="explain_aes">
+        <item><b>Bottom line:</b> Excellent encryption! AES is quite literally the gold-standard for securing communications.</item>
+    </string-array>
+
     <string name="title_activity_explanation">Further Explanation</string>
 
 </resources>

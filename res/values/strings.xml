@@ -29,7 +29,7 @@
 			Services will vary by provider - if you are not certain that they use
 			encryption, it is usually best to play it safe and wait until you are
 			on a more secure network.</item>
-        <item>This network is safe to use for:&lt;li>General web browsing (news, sports, games)&lt;/li>&lt;li>Viewing encrypted web sites (most email, facebook, etc.)&lt;/li></item>
+        <item></item>
     </string-array>
     <string-array name="explain_wep">
         <item>&lt;b>Bottom line:&lt;/b> Proceed with caution! This network has minor protection that is easily broken.</item>
@@ -73,7 +73,5 @@
             most things, you should trust but verify.</item>
         <item></item>
     </string-array>
-
-    
 
 </resources>

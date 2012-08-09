@@ -45,7 +45,7 @@
             connect devices to a wireless network. Properly implemented, this poses little
             threat. However, recent developments have allowed attackers to use this system
             to gain unauthorized access with relative ease. Though the attack is not yet
-            commonplace - it's popularity is sure to grow.</item>
+            commonplace - it\'s popularity is sure to grow.</item>
         <item></item>
     </string-array>
     <string-array name="explain_wpa">

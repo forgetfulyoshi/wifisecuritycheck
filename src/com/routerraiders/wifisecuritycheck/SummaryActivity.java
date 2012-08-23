@@ -1,5 +1,7 @@
 package com.routerraiders.wifisecuritycheck;
 
+import java.util.ArrayList;
+
 import android.annotation.TargetApi;
 import android.app.ListActivity;
 import android.content.Context;
@@ -13,7 +15,6 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -21,8 +22,15 @@ import android.widget.ProgressBar;
 
 public class SummaryActivity extends ListActivity {
 
+    protected static final String AES = "AES/CCMP";
+    protected static final String TKIP = "TKIP";
+    protected static final String WEP = "WEP";
+    protected static final String OPEN = "Open Network";
+    protected static final String WPA = "WPA/WPA2";
+    protected static final String ERROR = "Scan Error";
     private ListView mListView;
-    private ArrayAdapter<String> mArrayAdapter;
+    private SecurityTypeArrayAdapter mArrayAdapter;
+    private ArrayList<SecurityType> mSecurityInfoList;
     
     @TargetApi(11)
     @Override
@@ -39,10 +47,14 @@ public class SummaryActivity extends ListActivity {
 	ProgressBar spinner = (ProgressBar) findViewById(R.id.summary_progressBar);
 	mListView.setEmptyView(spinner);
 	
+	/*
 	mArrayAdapter = new ArrayAdapter<String>(SummaryActivity.this, android.R.layout.simple_list_item_1,
 		android.R.id.text1);
-	
+	*/
+	mSecurityInfoList = new ArrayList<SecurityType>();
+	mArrayAdapter = new SecurityTypeArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
 	mListView.setAdapter(mArrayAdapter);
+	
 
     }
 
@@ -72,18 +84,52 @@ public class SummaryActivity extends ListActivity {
 		mArrayAdapter.clear();
 		
 		if (config == null) {
-		    mArrayAdapter.add("Test Network");
+		    mArrayAdapter.add(new SecurityType(SecurityType.Type.ERROR, SecurityType.Name.ERROR));
 		    mArrayAdapter.notifyDataSetChanged();
 		    return;
 		}
 		
+		/*
 		if (config.allowedProtocols.get(WifiConfiguration.Protocol.RSN)) {
-
-		} else {
-		    mArrayAdapter.add("Open Network");
+		    mArrayAdapter.add("WPA2");
+		}
+		
+		if (config.allowedProtocols.get(WifiConfiguration.Protocol.WPA)) {
+		}
+		
+		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.OPEN)) {
+		    // Used for WPA/WPA2 networks
+		    mArrayAdapter.add(WPA);
+		}
+		
+		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.SHARED)){
+		    // WEP shared key authentication
+		}
+		
+		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.LEAP)){
+		    // LEAP authentication
+		}
+		
+		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.CCMP)) {
+		    // AES
+		    mArrayAdapter.add(AES);
+		}
+		
+		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.TKIP)) {
+		    // TKIP
+		    mArrayAdapter.add(TKIP);
+		}
+		
+		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.WEP104) || config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.WEP40)) {
+		    mArrayAdapter.add(WEP);
+		}
+		    
+		if (mArrayAdapter.isEmpty()) {
+		    mArrayAdapter.add(OPEN);
 		}
 		
 		mArrayAdapter.notifyDataSetChanged();
+	    	*/
 	    }
 
 	}.execute(this.getApplicationContext());
@@ -108,6 +154,8 @@ public class SummaryActivity extends ListActivity {
     
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-	startActivity(new Intent(this, DetailsActivity.class));
+	Integer security = 0;
+	
+	startActivity(new Intent(this, DetailsActivity.class).putExtra(DetailsActivity.SECURITY, security));
     }
 }

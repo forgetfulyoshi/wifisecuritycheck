@@ -14,13 +14,6 @@ import android.widget.TextView;
 public class DetailsActivity extends Activity {
 
     public static final String SECURITY = "com.routerraiders.wifisecuritycheck.security";
-    public static final int WEP = 0;
-    public static final int WPA = 1;
-    public static final int WPA2 = 2;
-    public static final int OPEN = 3;
-    public static final int TKIP = 4;
-    public static final int AES = 5;
-    public static final int WPS = 6;
 
     private TextView mBottomLine;
     private TextView mExplanation;
@@ -47,29 +40,29 @@ public class DetailsActivity extends Activity {
     public void onResume() {
 	super.onResume();
 
-	int security = mIncomingIntent.getIntExtra(SECURITY, OPEN);
+	int security = mIncomingIntent.getIntExtra(SECURITY, SecurityType.Type.ERROR);
 	int resource = 0;
 
 	switch (security) {
-	case OPEN:
+	case SecurityType.Type.OPEN:
 	    resource = R.array.explain_open_wifi;
 	    break;
-	case WEP:
+	case SecurityType.Type.WEP:
 	    resource = R.array.explain_wep;
 	    break;
-	case WPA:
+	case SecurityType.Type.WPA:
 	    resource = R.array.explain_wpa;
 	    break;
-	case WPA2:
+	case SecurityType.Type.WPA2:
 	    resource = R.array.explain_wpa;
 	    break;
-	case TKIP:
+	case SecurityType.Type.TKIP:
 	    resource = R.array.explain_tkip;
 	    break;
-	case AES:
+	case SecurityType.Type.AES:
 	    resource = R.array.explain_aes;
 	    break;
-	case WPS:
+	case SecurityType.Type.WPS:
 	    resource = R.array.explain_wps;
 	    break;
 	default:

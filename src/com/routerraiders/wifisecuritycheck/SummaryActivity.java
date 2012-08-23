@@ -29,7 +29,7 @@ public class SummaryActivity extends ListActivity {
     protected static final String WPA = "WPA/WPA2";
     protected static final String ERROR = "Scan Error";
     private ListView mListView;
-    private SecurityTypeArrayAdapter mArrayAdapter;
+    private SecurityInfoArrayAdapter mArrayAdapter;
     private ArrayList<SecurityInfo> mSecurityInfoList;
     
     @TargetApi(11)
@@ -52,7 +52,7 @@ public class SummaryActivity extends ListActivity {
 		android.R.id.text1);
 	*/
 	mSecurityInfoList = new ArrayList<SecurityInfo>();
-	mArrayAdapter = new SecurityTypeArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
+	mArrayAdapter = new SecurityInfoArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
 	mListView.setAdapter(mArrayAdapter);
 	
 

@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class SecurityTypeArrayAdapter extends ArrayAdapter<SecurityInfo> {
+public class SecurityInfoArrayAdapter extends ArrayAdapter<SecurityInfo> {
 
     private ArrayList<SecurityInfo> mItems;
     private Context mContext;
     
-    public SecurityTypeArrayAdapter(Context context, int textViewResourceId, ArrayList<SecurityInfo> objects) {
+    public SecurityInfoArrayAdapter(Context context, int textViewResourceId, ArrayList<SecurityInfo> objects) {
 	super(context, textViewResourceId, objects);
 	mContext = context;
     }

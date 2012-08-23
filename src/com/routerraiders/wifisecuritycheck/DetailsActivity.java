@@ -40,29 +40,29 @@ public class DetailsActivity extends Activity {
     public void onResume() {
 	super.onResume();
 
-	int security = mIncomingIntent.getIntExtra(SECURITY, SecurityType.Type.ERROR);
+	int security = mIncomingIntent.getIntExtra(SECURITY, SecurityInfo.Type.ERROR);
 	int resource = 0;
 
 	switch (security) {
-	case SecurityType.Type.OPEN:
+	case SecurityInfo.Type.OPEN:
 	    resource = R.array.explain_open_wifi;
 	    break;
-	case SecurityType.Type.WEP:
+	case SecurityInfo.Type.WEP:
 	    resource = R.array.explain_wep;
 	    break;
-	case SecurityType.Type.WPA:
+	case SecurityInfo.Type.WPA:
 	    resource = R.array.explain_wpa;
 	    break;
-	case SecurityType.Type.WPA2:
+	case SecurityInfo.Type.WPA2:
 	    resource = R.array.explain_wpa;
 	    break;
-	case SecurityType.Type.TKIP:
+	case SecurityInfo.Type.TKIP:
 	    resource = R.array.explain_tkip;
 	    break;
-	case SecurityType.Type.AES:
+	case SecurityInfo.Type.AES:
 	    resource = R.array.explain_aes;
 	    break;
-	case SecurityType.Type.WPS:
+	case SecurityInfo.Type.WPS:
 	    resource = R.array.explain_wps;
 	    break;
 	default:

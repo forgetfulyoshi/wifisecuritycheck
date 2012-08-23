@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class SecurityTypeArrayAdapter extends ArrayAdapter<SecurityType> {
+public class SecurityTypeArrayAdapter extends ArrayAdapter<SecurityInfo> {
 
-    private ArrayList<SecurityType> mItems;
+    private ArrayList<SecurityInfo> mItems;
     private Context mContext;
     
-    public SecurityTypeArrayAdapter(Context context, int textViewResourceId, ArrayList<SecurityType> objects) {
+    public SecurityTypeArrayAdapter(Context context, int textViewResourceId, ArrayList<SecurityInfo> objects) {
 	super(context, textViewResourceId, objects);
 	mContext = context;
     }
@@ -27,7 +27,7 @@ public class SecurityTypeArrayAdapter extends ArrayAdapter<SecurityType> {
 	    convertView = inflater.inflate(android.R.layout.simple_list_item_1, null);
 	}
 	
-	SecurityType item = getItem(position);
+	SecurityInfo item = getItem(position);
 	if (item != null) {
 	    TextView itemView = (TextView) convertView.findViewById(android.R.id.text1);
 	    if (itemView != null) {

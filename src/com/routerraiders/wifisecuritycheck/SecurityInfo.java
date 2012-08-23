@@ -1,6 +1,6 @@
 package com.routerraiders.wifisecuritycheck;
 
-public class SecurityType {
+public class SecurityInfo {
 
     static class Type {
 	public static final int AES = 0;
@@ -27,7 +27,7 @@ public class SecurityType {
     public int type;
     public String name;
 
-    SecurityType(int type, String name) {
+    SecurityInfo(int type, String name) {
 	this.type = type;
 	this.name = name;
     }

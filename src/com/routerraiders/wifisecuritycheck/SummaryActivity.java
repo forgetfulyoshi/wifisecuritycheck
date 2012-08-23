@@ -30,7 +30,7 @@ public class SummaryActivity extends ListActivity {
     protected static final String ERROR = "Scan Error";
     private ListView mListView;
     private SecurityTypeArrayAdapter mArrayAdapter;
-    private ArrayList<SecurityType> mSecurityInfoList;
+    private ArrayList<SecurityInfo> mSecurityInfoList;
     
     @TargetApi(11)
     @Override
@@ -51,7 +51,7 @@ public class SummaryActivity extends ListActivity {
 	mArrayAdapter = new ArrayAdapter<String>(SummaryActivity.this, android.R.layout.simple_list_item_1,
 		android.R.id.text1);
 	*/
-	mSecurityInfoList = new ArrayList<SecurityType>();
+	mSecurityInfoList = new ArrayList<SecurityInfo>();
 	mArrayAdapter = new SecurityTypeArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
 	mListView.setAdapter(mArrayAdapter);
 	
@@ -84,7 +84,7 @@ public class SummaryActivity extends ListActivity {
 		mArrayAdapter.clear();
 		
 		if (config == null) {
-		    mArrayAdapter.add(new SecurityType(SecurityType.Type.ERROR, SecurityType.Name.ERROR));
+		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.ERROR, SecurityInfo.Name.ERROR));
 		    mArrayAdapter.notifyDataSetChanged();
 		    return;
 		}

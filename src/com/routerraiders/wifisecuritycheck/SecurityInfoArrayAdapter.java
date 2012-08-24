@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 public class SecurityInfoArrayAdapter extends ArrayAdapter<SecurityInfo> {
 
-    private ArrayList<SecurityInfo> mItems;
     private Context mContext;
     
     public SecurityInfoArrayAdapter(Context context, int textViewResourceId, ArrayList<SecurityInfo> objects) {

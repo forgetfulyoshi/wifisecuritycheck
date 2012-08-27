@@ -21,13 +21,7 @@ import android.widget.ProgressBar;
 
 
 public class SummaryActivity extends ListActivity {
-
-    protected static final String AES = "AES/CCMP";
-    protected static final String TKIP = "TKIP";
-    protected static final String WEP = "WEP";
-    protected static final String OPEN = "Open Network";
-    protected static final String WPA = "WPA/WPA2";
-    protected static final String ERROR = "Scan Error";
+    
     private ListView mListView;
     private SecurityInfoArrayAdapter mArrayAdapter;
     private ArrayList<SecurityInfo> mSecurityInfoList;
@@ -89,9 +83,9 @@ public class SummaryActivity extends ListActivity {
 		    return;
 		}
 		
-		/*
+		
 		if (config.allowedProtocols.get(WifiConfiguration.Protocol.RSN)) {
-		    mArrayAdapter.add("WPA2");
+		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA2, SecurityInfo.Name.WPA2));
 		}
 		
 		if (config.allowedProtocols.get(WifiConfiguration.Protocol.WPA)) {
@@ -99,7 +93,7 @@ public class SummaryActivity extends ListActivity {
 		
 		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.OPEN)) {
 		    // Used for WPA/WPA2 networks
-		    mArrayAdapter.add(WPA);
+		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA, SecurityInfo.Name.WPA));
 		}
 		
 		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.SHARED)){
@@ -112,24 +106,24 @@ public class SummaryActivity extends ListActivity {
 		
 		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.CCMP)) {
 		    // AES
-		    mArrayAdapter.add(AES);
+		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.AES, SecurityInfo.Name.AES));
 		}
 		
 		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.TKIP)) {
 		    // TKIP
-		    mArrayAdapter.add(TKIP);
+		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.TKIP, SecurityInfo.Name.TKIP));
 		}
 		
 		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.WEP104) || config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.WEP40)) {
-		    mArrayAdapter.add(WEP);
+		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WEP, SecurityInfo.Name.WEP));
 		}
 		    
 		if (mArrayAdapter.isEmpty()) {
-		    mArrayAdapter.add(OPEN);
+		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.OPEN, SecurityInfo.Name.OPEN));
 		}
 		
 		mArrayAdapter.notifyDataSetChanged();
-	    	*/
+	    	
 	    }
 
 	}.execute(this.getApplicationContext());
@@ -154,8 +148,7 @@ public class SummaryActivity extends ListActivity {
     
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-	Integer security = 0;
-	
+	Integer security = (Integer) v.getTag();
 	startActivity(new Intent(this, DetailsActivity.class).putExtra(DetailsActivity.SECURITY, security));
     }
 }

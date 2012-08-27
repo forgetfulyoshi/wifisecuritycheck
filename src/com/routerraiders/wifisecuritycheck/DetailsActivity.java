@@ -65,16 +65,19 @@ public class DetailsActivity extends Activity {
 	case SecurityInfo.Type.WPS:
 	    resource = R.array.explain_wps;
 	    break;
+	case SecurityInfo.Type.ERROR:
+	    break;
 	default:
 	    resource = R.array.explain_open_wifi;
 	    break;
 	}
 
-	String[] infoStrings = getResources().getStringArray(resource);
-
-	mBottomLine.setText(Html.fromHtml(infoStrings[0]));
-	mExplanation.setText(Html.fromHtml(infoStrings[1]));
-	mUses.setText(Html.fromHtml(infoStrings[2]));
+	if (0 != resource) {
+	    String[] infoStrings = getResources().getStringArray(resource);
+	    mBottomLine.setText(Html.fromHtml(infoStrings[0]));
+	    mExplanation.setText(Html.fromHtml(infoStrings[1]));
+	    mUses.setText(Html.fromHtml(infoStrings[2]));
+	}
     }
 
     @Override

@@ -8,7 +8,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 public class SummaryActivity extends ListActivity {
 
@@ -94,9 +94,12 @@ public class SummaryActivity extends ListActivity {
 
 		if (config.capabilities.contains("WPA")) {
 
-		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA2, SecurityInfo.Name.WPA2));
-		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA, SecurityInfo.Name.WPA));
-
+		    if (config.capabilities.contains("WPA2")) {
+			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA2, SecurityInfo.Name.WPA2));
+		    } else {
+			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA, SecurityInfo.Name.WPA));
+		    }
+		    
 		    if (config.capabilities.contains("CCMP")) {
 			// AES
 			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.AES, SecurityInfo.Name.AES));
@@ -107,12 +110,17 @@ public class SummaryActivity extends ListActivity {
 			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.TKIP, SecurityInfo.Name.TKIP));
 		    }
 
+		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.green_lock);
+
 		} else if (config.capabilities.contains("WEP")) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WEP, SecurityInfo.Name.WEP));
+
+		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.yellow_lock);
 		}
 
 		if (mArrayAdapter.isEmpty()) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.OPEN, SecurityInfo.Name.OPEN));
+		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.red_lock);
 		}
 
 		mArrayAdapter.notifyDataSetChanged();

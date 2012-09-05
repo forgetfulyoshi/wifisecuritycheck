@@ -1,31 +1,33 @@
 package com.routerraiders.wifisecuritycheck;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-
-
 public class SummaryActivity extends ListActivity {
-    
+
+    private static final String TAG = "SummaryActivity";
     private ListView mListView;
     private SecurityInfoArrayAdapter mArrayAdapter;
     private ArrayList<SecurityInfo> mSecurityInfoList;
-    
+
     @TargetApi(11)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,20 +37,19 @@ public class SummaryActivity extends ListActivity {
 	if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
-	
+
 	mListView = this.getListView();
-	
+
 	ProgressBar spinner = (ProgressBar) findViewById(R.id.summary_progressBar);
 	mListView.setEmptyView(spinner);
-	
+
 	/*
-	mArrayAdapter = new ArrayAdapter<String>(SummaryActivity.this, android.R.layout.simple_list_item_1,
-		android.R.id.text1);
-	*/
+	 * mArrayAdapter = new ArrayAdapter<String>(SummaryActivity.this,
+	 * android.R.layout.simple_list_item_1, android.R.id.text1);
+	 */
 	mSecurityInfoList = new ArrayList<SecurityInfo>();
 	mArrayAdapter = new SecurityInfoArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
 	mListView.setAdapter(mArrayAdapter);
-	
 
     }
 
@@ -56,16 +57,23 @@ public class SummaryActivity extends ListActivity {
     public void onResume() {
 	super.onResume();
 
-	new AsyncTask<Context, Void, WifiConfiguration>() {
+	new AsyncTask<Context, Void, ScanResult>() {
 	    @Override
-	    protected WifiConfiguration doInBackground(Context... contexts) {
+	    protected ScanResult doInBackground(Context... contexts) {
 		// Get wifi info
 
 		WifiManager manager = (WifiManager) contexts[0].getSystemService(WIFI_SERVICE);
+		List<ScanResult> scanResults = null;
 
-		for (WifiConfiguration config : manager.getConfiguredNetworks()) {
-		    if (WifiConfiguration.Status.CURRENT == config.status) {
-			return config;
+		if (manager.startScan()) {
+		    while (scanResults == null || scanResults.isEmpty()) {
+			scanResults = manager.getScanResults();
+		    }
+
+		    for (ScanResult result : scanResults) {
+			if (manager.getConnectionInfo().getBSSID().equals(result.BSSID)) {
+			    return result;
+			}
 		    }
 		}
 
@@ -73,60 +81,45 @@ public class SummaryActivity extends ListActivity {
 	    }
 
 	    @Override
-	    protected void onPostExecute(WifiConfiguration config) {
-		
+	    protected void onPostExecute(ScanResult config) {
+
 		mArrayAdapter.clear();
-		
+
 		if (config == null) {
+		    Log.d(TAG, "got null for wificonfig");
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.ERROR, SecurityInfo.Name.ERROR));
 		    mArrayAdapter.notifyDataSetChanged();
 		    return;
 		}
-		
-		
-		if (config.allowedProtocols.get(WifiConfiguration.Protocol.RSN)) {
+
+		if (config.capabilities.contains("WPA")) {
+
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA2, SecurityInfo.Name.WPA2));
-		}
-		
-		if (config.allowedProtocols.get(WifiConfiguration.Protocol.WPA)) {
-		}
-		
-		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.OPEN)) {
-		    // Used for WPA/WPA2 networks
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WPA, SecurityInfo.Name.WPA));
-		}
-		
-		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.SHARED)){
-		    // WEP shared key authentication
-		}
-		
-		if (config.allowedAuthAlgorithms.get(WifiConfiguration.AuthAlgorithm.LEAP)){
-		    // LEAP authentication
-		}
-		
-		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.CCMP)) {
-		    // AES
-		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.AES, SecurityInfo.Name.AES));
-		}
-		
-		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.TKIP)) {
-		    // TKIP
-		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.TKIP, SecurityInfo.Name.TKIP));
-		}
-		
-		if (config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.WEP104) || config.allowedGroupCiphers.get(WifiConfiguration.GroupCipher.WEP40)) {
+
+		    if (config.capabilities.contains("CCMP")) {
+			// AES
+			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.AES, SecurityInfo.Name.AES));
+		    }
+
+		    if (config.capabilities.contains("TKIP")) {
+			// TKIP
+			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.TKIP, SecurityInfo.Name.TKIP));
+		    }
+
+		} else if (config.capabilities.contains("WEP")) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WEP, SecurityInfo.Name.WEP));
 		}
-		    
+
 		if (mArrayAdapter.isEmpty()) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.OPEN, SecurityInfo.Name.OPEN));
 		}
-		
+
 		mArrayAdapter.notifyDataSetChanged();
-	    	
+
 	    }
 
-	}.execute(this.getApplicationContext());
+	}.execute(this);
 
     }
 
@@ -145,7 +138,7 @@ public class SummaryActivity extends ListActivity {
 	}
 	return super.onOptionsItemSelected(item);
     }
-    
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 	Integer security = (Integer) v.getTag();

@@ -43,13 +43,12 @@ public class SummaryActivity extends ListActivity {
 	ProgressBar spinner = (ProgressBar) findViewById(R.id.summary_progressBar);
 	mListView.setEmptyView(spinner);
 
-	/*
-	 * mArrayAdapter = new ArrayAdapter<String>(SummaryActivity.this,
-	 * android.R.layout.simple_list_item_1, android.R.id.text1);
-	 */
 	mSecurityInfoList = new ArrayList<SecurityInfo>();
 	mArrayAdapter = new SecurityInfoArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
 	mListView.setAdapter(mArrayAdapter);
+	
+	WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+	setTitle(getTitle() + " for " + manager.getConnectionInfo().getSSID());
 
     }
 
@@ -111,16 +110,18 @@ public class SummaryActivity extends ListActivity {
 		    }
 
 		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.green_lock);
+		    setTitle("Network " + config.SSID + " is secure!");
 
 		} else if (config.capabilities.contains("WEP")) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WEP, SecurityInfo.Name.WEP));
-
 		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.yellow_lock);
+		    setTitle("Network " + config.SSID + " is NOT very secure,");
 		}
 
 		if (mArrayAdapter.isEmpty()) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.OPEN, SecurityInfo.Name.OPEN));
 		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.red_lock);
+		    setTitle("Network " + config.SSID + " is wide open!");
 		}
 
 		mArrayAdapter.notifyDataSetChanged();

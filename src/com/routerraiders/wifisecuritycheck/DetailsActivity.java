@@ -42,37 +42,49 @@ public class DetailsActivity extends Activity {
 
 	int security = mIncomingIntent.getIntExtra(SECURITY, SecurityInfo.Type.ERROR);
 	int resource = 0;
+	String name = "";
 
 	switch (security) {
 	case SecurityInfo.Type.OPEN:
 	    resource = R.array.explain_open_wifi;
+	    name = SecurityInfo.Name.OPEN;
 	    break;
 	case SecurityInfo.Type.WEP:
 	    resource = R.array.explain_wep;
+	    name = SecurityInfo.Name.WEP;
 	    break;
 	case SecurityInfo.Type.WPA:
 	    resource = R.array.explain_wpa;
+	    name = SecurityInfo.Name.WPA;
 	    break;
 	case SecurityInfo.Type.WPA2:
 	    resource = R.array.explain_wpa;
+	    name = SecurityInfo.Name.WPA2;
 	    break;
 	case SecurityInfo.Type.TKIP:
 	    resource = R.array.explain_tkip;
+	    name = SecurityInfo.Name.TKIP;
 	    break;
 	case SecurityInfo.Type.AES:
 	    resource = R.array.explain_aes;
+	    name = SecurityInfo.Name.AES;
 	    break;
 	case SecurityInfo.Type.WPS:
 	    resource = R.array.explain_wps;
+	    name = SecurityInfo.Name.WPS;
 	    break;
 	case SecurityInfo.Type.ERROR:
 	    break;
 	default:
 	    resource = R.array.explain_open_wifi;
+	    name = SecurityInfo.Name.OPEN;
 	    break;
 	}
 
 	if (0 != resource) {
+	 
+	    setTitle(getTitle() + " of " + name);
+	    
 	    String[] infoStrings = getResources().getStringArray(resource);
 	    mBottomLine.setText(Html.fromHtml(infoStrings[0]));
 	    mExplanation.setText(Html.fromHtml(infoStrings[1]));

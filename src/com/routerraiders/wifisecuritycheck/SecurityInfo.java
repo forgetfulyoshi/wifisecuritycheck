@@ -19,7 +19,7 @@ public class SecurityInfo {
 	public static final String WEP = "WEP";
 	public static final String OPEN = "Open Network";
 	public static final String WPA = "WPA";
-	public static final String WPA2 = "WPA2";
+	public static final String WPA2 = "WPA/WPA2";
 	public static final String ERROR = "Scan Error";
 	public static final String WPS = "WPS";
     }

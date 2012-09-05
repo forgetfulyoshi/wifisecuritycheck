@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -31,12 +33,14 @@ public class HomeActivity extends Activity {
     public void onStartButtonClick(View view) {
 
 	WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+	ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	NetworkInfo wifiInfo  = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-	if (!manager.isWifiEnabled()) {
+	if (!manager.isWifiEnabled() || !wifiInfo.isConnected()) {
 	    showDialog(DIALOG_ACTIVATE_WIFI);
 	}
-
-	if (manager.isWifiEnabled()) {
+	
+	if (wifiInfo.isConnected()) {
 	    this.startActivity(new Intent(this, SummaryActivity.class));
 	}
     }

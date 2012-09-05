@@ -11,7 +11,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.Menu;
 import android.view.View;
 
 public class HomeActivity extends Activity {
@@ -22,12 +21,6 @@ public class HomeActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_home);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.activity_home, menu);
-	return true;
     }
 
     public void onStartButtonClick(View view) {

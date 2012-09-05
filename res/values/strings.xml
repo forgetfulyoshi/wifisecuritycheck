@@ -7,6 +7,8 @@
     <string name="main_button_start">Start Scan!</string>
     <string name="title_activity_summary">Scan Summary</string>
 	<string name="title_activity_explanation">Further Explanation</string>
+	<string name="dialog_activate_wifi">Before proceeding, we need you to connect to the network you wish to test.
+	    Would you like to connect now?</string>
     
     <!-- Lables -->
     <string name="lable_security">Security:</string>

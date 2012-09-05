@@ -1,28 +1,75 @@
 package com.routerraiders.wifisecuritycheck;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.View;
 
 public class HomeActivity extends Activity {
 
+    private static final int DIALOG_ACTIVATE_WIFI = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_home);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_home, menu);
-        return true;
-    }
-    
-    public void onStartButtonClick(View view) {
-	this.startActivity(new Intent(this, SummaryActivity.class));
+	getMenuInflater().inflate(R.menu.activity_home, menu);
+	return true;
     }
 
-    
+    public void onStartButtonClick(View view) {
+
+	WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+	if (!manager.isWifiEnabled()) {
+	    showDialog(DIALOG_ACTIVATE_WIFI);
+	}
+
+	if (manager.isWifiEnabled()) {
+	    this.startActivity(new Intent(this, SummaryActivity.class));
+	}
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+	Dialog dialog;
+	switch (id) {
+	case DIALOG_ACTIVATE_WIFI:
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder.setMessage(R.string.dialog_activate_wifi);
+	    builder.setCancelable(false);
+	    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+		public void onClick(DialogInterface dialog, int which) {
+		    HomeActivity.this.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+		}
+	    });
+
+	    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+		public void onClick(DialogInterface dialog, int which) {
+		    dialog.cancel();
+		}
+	    });
+
+	    dialog = builder.create();
+	    break;
+
+	default:
+	    dialog = null;
+	}
+	return dialog;
+    }
+
 }

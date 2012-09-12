@@ -75,5 +75,6 @@
             most things, you should trust but verify.</item>
         <item></item>
     </string-array>
+        <string name="summary_hint">Click any item for more information</string>
 
 </resources>

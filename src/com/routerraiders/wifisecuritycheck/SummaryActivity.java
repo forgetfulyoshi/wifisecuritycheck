@@ -26,6 +26,7 @@ public class SummaryActivity extends ListActivity {
     private ListView mListView;
     private SecurityInfoArrayAdapter mArrayAdapter;
     private ArrayList<SecurityInfo> mSecurityInfoList;
+    private RelativeLayout mBackgroundHolder;
 
     @TargetApi(11)
     @Override
@@ -45,6 +46,8 @@ public class SummaryActivity extends ListActivity {
 	mSecurityInfoList = new ArrayList<SecurityInfo>();
 	mArrayAdapter = new SecurityInfoArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
 	mListView.setAdapter(mArrayAdapter);
+	
+	mBackgroundHolder = (RelativeLayout) findViewById(R.id.summary_background);
 
 	WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 	setTitle(getTitle() + " for " + manager.getConnectionInfo().getSSID());
@@ -54,7 +57,7 @@ public class SummaryActivity extends ListActivity {
     @Override
     public void onResume() {
 	super.onResume();
-
+	
 	new AsyncTask<Context, Void, ScanResult>() {
 	    @Override
 	    protected ScanResult doInBackground(Context... contexts) {
@@ -100,26 +103,26 @@ public class SummaryActivity extends ListActivity {
 
 		    if (config.capabilities.contains("CCMP")) {
 			// AES
-			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.AES, SecurityInfo.Name.AES));
-			((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.green_lock);
+			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.AES, SecurityInfo.Name.AES));			
+			mBackgroundHolder.setBackgroundResource(R.raw.green_lock);
 			setTitle("Network " + config.SSID + " is very secure!");
 		    }
 
 		    if (config.capabilities.contains("TKIP")) {
 			// TKIP
 			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.TKIP, SecurityInfo.Name.TKIP));
-			((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.yellow_lock);
+			mBackgroundHolder.setBackgroundResource(R.raw.yellow_lock);
 			setTitle("Network " + config.SSID + " is fairly secure.");
 		    }
 
 		} else if (config.capabilities.contains("WEP")) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WEP, SecurityInfo.Name.WEP));
-		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.yellow_lock);
+		    mBackgroundHolder.setBackgroundResource(R.raw.yellow_lock);
 		    setTitle("Network " + config.SSID + " is NOT very secure,");
 		
 		} else {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.OPEN, SecurityInfo.Name.OPEN));
-		    ((RelativeLayout) mListView.getParent()).setBackgroundResource(R.raw.red_lock);
+		    mBackgroundHolder.setBackgroundResource(R.raw.red_lock);
 		    setTitle("Network " + config.SSID + " is wide open!");
 		}
 
@@ -128,7 +131,6 @@ public class SummaryActivity extends ListActivity {
 	    }
 
 	}.execute(this);
-
     }
 
     @Override

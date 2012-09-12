@@ -1,16 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RelativeLayout1"
+    android:id="@+id/RelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/summary_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/summary_hint"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    
     <ListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_above="@id/summary_hint"
         android:layout_alignParentTop="true" >
+
     </ListView>
 
     <ProgressBar
@@ -18,11 +29,17 @@
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/android:list"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_centerInParent="true"
         android:indeterminate="true"
         android:visibility="invisible" />
 
+    <RelativeLayout
+        android:id="@+id/summary_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+    </RelativeLayout>
+
+    
 </RelativeLayout>

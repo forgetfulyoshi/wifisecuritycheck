@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
@@ -23,6 +24,7 @@ public class HomeActivity extends Activity {
 	setContentView(R.layout.activity_home);
     }
 
+    @SuppressWarnings("deprecation")
     public void onStartButtonClick(View view) {
 
 	WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);

@@ -6,17 +6,19 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 public class HomeActivity extends Activity {
 
     private static final int DIALOG_ACTIVATE_WIFI = 0;
+    private static final int ABOUT = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,12 +31,12 @@ public class HomeActivity extends Activity {
 
 	WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 	ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	NetworkInfo wifiInfo  = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+	NetworkInfo wifiInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
 	if (!manager.isWifiEnabled() || !wifiInfo.isConnected()) {
 	    showDialog(DIALOG_ACTIVATE_WIFI);
 	}
-	
+
 	if (wifiInfo.isConnected()) {
 	    this.startActivity(new Intent(this, SummaryActivity.class));
 	}
@@ -69,6 +71,24 @@ public class HomeActivity extends Activity {
 	    dialog = null;
 	}
 	return dialog;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+	menu.add(0, ABOUT, 0, "About");
+	return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+	switch (item.getItemId()) {
+	case ABOUT:
+	    AboutDialog about = new AboutDialog(this);
+	    //about.setTitle("about this app");
+	    about.show();
+
+	    break;
+
+	}
+	return true;
     }
 
 }

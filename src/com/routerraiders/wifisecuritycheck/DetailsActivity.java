@@ -3,21 +3,27 @@ package com.routerraiders.wifisecuritycheck;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class DetailsActivity extends Activity {
 
     public static final String SECURITY = "com.routerraiders.wifisecuritycheck.security";
 
+    private static final String TAG = "DetailsActivity";
+
     private TextView mBottomLine;
     private TextView mExplanation;
     private TextView mUses;
     private Intent mIncomingIntent;
+    private String mWikiUrl;
 
     @TargetApi(11)
     @Override
@@ -81,13 +87,15 @@ public class DetailsActivity extends Activity {
 	}
 
 	if (0 != resource) {
-	 
+
 	    setTitle(getTitle() + " of " + name);
-	    
+
 	    String[] infoStrings = getResources().getStringArray(resource);
 	    mBottomLine.setText(Html.fromHtml(infoStrings[0]));
 	    mExplanation.setText(Html.fromHtml(infoStrings[1]));
 	    mUses.setText(Html.fromHtml(infoStrings[2]));
+	    mWikiUrl = infoStrings[3];
+	    Log.d(TAG, mWikiUrl);
 	}
     }
 
@@ -99,6 +107,14 @@ public class DetailsActivity extends Activity {
 	    return true;
 	}
 	return super.onOptionsItemSelected(item);
+    }
+
+    public void onWikipediaClick(View view) {
+
+	Intent launch = new Intent(Intent.ACTION_VIEW);
+	launch.setData(Uri.parse(mWikiUrl));
+	startActivity(launch);
+
     }
 
 }

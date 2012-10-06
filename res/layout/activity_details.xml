@@ -30,4 +30,13 @@
         android:layout_below="@+id/detail_explain"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <Button
+        android:id="@+id/detail_wikipedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onWikipediaClick"
+        android:text="@string/detail_wikipedia" />
+
 </RelativeLayout>

@@ -32,7 +32,9 @@
 			encryption, it is usually best to play it safe and wait until you are
 			on a more secure network.</item>
         <item></item>
+        <item>https://en.wikipedia.org/wiki/Hotspot_(Wi-Fi)#Security_concerns</item>
     </string-array>
+    
     <string-array name="explain_wep">
         <item>&lt;b>Bottom line:&lt;/b> Proceed with caution! This network has minor protection that is easily broken.</item>
         <item>&lt;b>Explanation: &lt;/b> WEP is an older securtiy mechanism which 
@@ -40,7 +42,9 @@
             attacks against it have rendered it useless. You really should not consider
             </item>
         <item></item>
+        <item>https://en.wikipedia.org/wiki/Wired_Equivalent_Privacy</item>
     </string-array>
+    
     <string-array name="explain_wps">
         <item>&lt;b>Bottom line:&lt;/b> You are probably safe, but be forewarned. This network can be rather easily hacked.</item>
         <item>&lt;b>Explanation: &lt;/b> WPS is a system which allows you to more easily
@@ -49,7 +53,9 @@
             to gain unauthorized access with relative ease. Though the attack is not yet
             commonplace - it\'s popularity is sure to grow.</item>
         <item></item>
+        <item>https://en.wikipedia.org/wiki/Wi-Fi_Protected_Setup</item>
     </string-array>
+    
     <string-array name="explain_wpa">
         <item>&lt;b>Bottom line:&lt;/b> This network uses an excellent form of security. It\'s only real weakness is an easy password - make sure it\'s a good one. </item>
         <item>&lt;b>Explanation: &lt;/b> WPA and WPA2 are considered the best form of wireless
@@ -57,7 +63,9 @@
             This means that the security is only as good as the password. Make sure it\'s hard
             to guess and that only the people who are allowed on the network know it.</item>
         <item></item>
+        <item>https://en.wikipedia.org/wiki/Wi-Fi_Protected_Access</item>
     </string-array>
+    
     <string-array name="explain_tkip">
         <item>&lt;b>Bottom line:&lt;/b> You are most likely perfectly safe. However, this network uses an older form of encryption which has several known vulnerabilities. </item>
         <item>&lt;b>Explanation: &lt;/b> TKIP is an older form of security which has similar
@@ -65,7 +73,9 @@
             that it is vulnerable to the same types of attacks. In general, using TKIP should
             be avoided in favor of the newer AES or CCMP systems.</item>
         <item></item>
+        <item>https://en.wikipedia.org/wiki/Temporal_Key_Integrity_Protocol</item>
     </string-array>
+    
     <string-array name="explain_aes">
         <item>&lt;b>Bottom line:&lt;/b> Excellent encryption! AES is quite literally the gold-standard for securing communications.</item>
         <item>&lt;b>Explanation: &lt;/b> AES is one of the strongest forms of security available.
@@ -74,7 +84,10 @@
             luck and poor implementation can still provide back-doors for attackers. As with
             most things, you should trust but verify.</item>
         <item></item>
+        <item>https://en.wikipedia.org/wiki/Advanced_Encryption_Standard</item>
     </string-array>
+    
         <string name="summary_hint">Click any item for more information</string>
+        <string name="detail_wikipedia">Find out more! (Wikipedia)</string>
 
 </resources>

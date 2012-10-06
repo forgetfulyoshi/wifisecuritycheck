@@ -82,7 +82,6 @@ public class HomeActivity extends Activity {
 	switch (item.getItemId()) {
 	case ABOUT:
 	    AboutDialog about = new AboutDialog(this);
-	    //about.setTitle("about this app");
 	    about.show();
 
 	    break;

@@ -1,13 +1,13 @@
 <resources>
 
-    <string name="app_name">Wifi Security Check</string>
+    <string name="app_name">Wifi Saftey Check</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_home">Wifi Security Check</string>
+    <string name="title_activity_home">Wifi Saftey Check</string>
     <string name="main_button_start">Start Scan!</string>
     <string name="title_activity_summary">Scan Summary</string>
 	<string name="title_activity_explanation">Further Explanation</string>
-	<string name="dialog_activate_wifi">Before proceeding, we need you to connect to the network you wish to test.
+	<string name="dialog_activate_wifi">Before proceeding, we need you to connect to the network you wish to check.
 	    Would you like to connect now?</string>
     
     <!-- Lables -->
@@ -89,5 +89,6 @@
     
         <string name="summary_hint">Click any item for more information</string>
         <string name="detail_wikipedia">Find out more! (Wikipedia)</string>
+        <string name="blue_lock">Blue combination lock</string>
 
 </resources>

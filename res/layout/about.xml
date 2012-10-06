@@ -12,6 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="left|center"
+        android:contentDescription="@string/blue_lock"
         android:src="@drawable/ic_launcher" />
 
     <TextView

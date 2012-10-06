@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class SummaryActivity extends ListActivity {
 
@@ -105,25 +106,25 @@ public class SummaryActivity extends ListActivity {
 			// AES
 			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.AES, SecurityInfo.Name.AES));			
 			mBackgroundHolder.setBackgroundResource(R.raw.green_lock);
-			setTitle("Network " + config.SSID + " is very secure!");
+			setResult("Network " + config.SSID + " is very secure!");
 		    }
 
 		    if (config.capabilities.contains("TKIP")) {
 			// TKIP
 			mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.TKIP, SecurityInfo.Name.TKIP));
 			mBackgroundHolder.setBackgroundResource(R.raw.yellow_lock);
-			setTitle("Network " + config.SSID + " is fairly secure.");
+			setResult("Network " + config.SSID + " is fairly secure.");
 		    }
 
 		} else if (config.capabilities.contains("WEP")) {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.WEP, SecurityInfo.Name.WEP));
 		    mBackgroundHolder.setBackgroundResource(R.raw.yellow_lock);
-		    setTitle("Network " + config.SSID + " is NOT very secure,");
+		    setResult("Network " + config.SSID + " is NOT very secure,");
 		
 		} else {
 		    mArrayAdapter.add(new SecurityInfo(SecurityInfo.Type.OPEN, SecurityInfo.Name.OPEN));
 		    mBackgroundHolder.setBackgroundResource(R.raw.red_lock);
-		    setTitle("Network " + config.SSID + " is wide open!");
+		    setResult("Network " + config.SSID + " is wide open!");
 		}
 
 		mArrayAdapter.notifyDataSetChanged();
@@ -147,5 +148,10 @@ public class SummaryActivity extends ListActivity {
     public void onListItemClick(ListView l, View v, int position, long id) {
 	Integer security = (Integer) v.getTag();
 	startActivity(new Intent(this, DetailsActivity.class).putExtra(DetailsActivity.SECURITY, security));
+    }
+    
+    private void setResult(String result) {
+	TextView banner = (TextView) findViewById(R.id.summary_announce);
+	banner.setText(result);
     }
 }

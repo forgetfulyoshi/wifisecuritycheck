@@ -23,23 +23,25 @@
     <!-- Instructional strings -->
     <string-array name="explain_open_wifi">
         <item>&lt;b>Bottom line:&lt;/b> Don\'t do anything on this network that you wouldn\'t want someone else seeing.</item>
-        <item>&lt;b>Explanation: &lt;/b>Open networks such as this have no security 
+        <item>&lt;b>Explanation: &lt;/b> Open networks such as this have no security 
         	features enabled. This typically means that &lt;b>ALL DATA&lt;/b> is 
         	readable by anyone nearby.The exception is if you are visiting a web
 			site or service that uses encryption. Web sites that use encryption
 			will always have a URL which begins with \"https\" rather than \"http\".
 			Services will vary by provider - if you are not certain that they use
 			encryption, it is usually best to play it safe and wait until you are
-			on a more secure network.</item>
+			on a more secure network such as those using WPA or WPA2.</item>
         <item></item>
         <item>https://en.wikipedia.org/wiki/Hotspot_(Wi-Fi)#Security_concerns</item>
     </string-array>
     
     <string-array name="explain_wep">
         <item>&lt;b>Bottom line:&lt;/b> Proceed with caution! This network has minor protection that is easily broken.</item>
-        <item>&lt;b>Explanation: &lt;/b> WEP is an older securtiy mechanism which 
+        <item>&lt;b>Explanation: &lt;/b> WEP is an older security mechanism which 
             worked well when it was introduced over a decade ago. However, modern
             attacks against it have rendered it useless. You really should not consider
+            this network to be secure. If you own this network, switch to the more secure
+            WPA or WPA2 in your wireless security settings. 
             </item>
         <item></item>
         <item>https://en.wikipedia.org/wiki/Wired_Equivalent_Privacy</item>
@@ -51,13 +53,14 @@
             connect devices to a wireless network. Properly implemented, this poses little
             threat. However, recent developments have allowed attackers to use this system
             to gain unauthorized access with relative ease. Though the attack is not yet
-            commonplace - it\'s popularity is sure to grow.</item>
+            commonplace - it\'s popularity is sure to grow. It\'s considered a best practice 
+            to disable this feature in your router\'s settings.</item>
         <item></item>
         <item>https://en.wikipedia.org/wiki/Wi-Fi_Protected_Setup</item>
     </string-array>
     
     <string-array name="explain_wpa">
-        <item>&lt;b>Bottom line:&lt;/b> This network uses an excellent form of security. It\'s only real weakness is an easy password - make sure it\'s a good one. </item>
+        <item>&lt;b>Bottom line:&lt;/b> This network uses an excellent form of security. It\'s only real weakness can be an easy password so make sure it\'s a good one. </item>
         <item>&lt;b>Explanation: &lt;/b> WPA and WPA2 are considered the best form of wireless
             security. They are typically used with a shared password (one password per network).
             This means that the security is only as good as the password. Make sure it\'s hard
@@ -71,7 +74,8 @@
         <item>&lt;b>Explanation: &lt;/b> TKIP is an older form of security which has similar
             attributes to the equally old WEP system. In fact, those attributes are so similar
             that it is vulnerable to the same types of attacks. In general, using TKIP should
-            be avoided in favor of the newer AES or CCMP systems.</item>
+            be avoided in favor of the newer AES/CCMP systems. However, these attacks tend to 
+            be less common. Don\'t lose sleep over this, but switch to AES/CCMP if you can.</item>
         <item></item>
         <item>https://en.wikipedia.org/wiki/Temporal_Key_Integrity_Protocol</item>
     </string-array>
@@ -82,7 +86,9 @@
             It is used in everything from encrypting wireless networks to protecting military
             and government secrets. There are no known direct attacks against AES. However, dumb
             luck and poor implementation can still provide back-doors for attackers. As with
-            most things, you should trust but verify.</item>
+            most things, you should trust but verify. Are you using WPA/WPA2? Is your password a 
+            good one? Did you purchase your router from a reputable source? If you answered 
+            \"yes\", then you are as safe as you can be.</item>
         <item></item>
         <item>https://en.wikipedia.org/wiki/Advanced_Encryption_Standard</item>
     </string-array>

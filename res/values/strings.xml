@@ -96,5 +96,6 @@
         <string name="summary_hint">Click any item for more information</string>
         <string name="detail_wikipedia">Find out more! (Wikipedia)</string>
         <string name="blue_lock">Blue combination lock</string>
+        <string name="menu_about">About</string>
 
 </resources>

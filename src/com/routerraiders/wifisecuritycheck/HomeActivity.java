@@ -18,7 +18,6 @@ import android.view.View;
 public class HomeActivity extends Activity {
 
     private static final int DIALOG_ACTIVATE_WIFI = 0;
-    private static final int ABOUT = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,13 +73,13 @@ public class HomeActivity extends Activity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-	menu.add(0, ABOUT, 0, "About");
+	getMenuInflater().inflate(R.menu.activity_home, menu);
 	return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
 	switch (item.getItemId()) {
-	case ABOUT:
+	case R.id.menu_about:
 	    AboutDialog about = new AboutDialog(this);
 	    about.show();
 

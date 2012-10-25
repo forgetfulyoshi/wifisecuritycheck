@@ -81,6 +81,7 @@ public class HomeActivity extends Activity {
 	switch (item.getItemId()) {
 	case R.id.menu_about:
 	    AboutDialog about = new AboutDialog(this);
+	    about.setTitle(R.string.menu_about);
 	    about.show();
 
 	    break;

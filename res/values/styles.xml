@@ -2,4 +2,11 @@
 
     <style name="AppTheme" parent="android:Theme.Light" />
 
+    <style name="ListText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:padding">@dimen/padding_small</item>
+    </style>
 </resources>

@@ -45,7 +45,7 @@ public class SummaryActivity extends ListActivity {
 	mListView.setEmptyView(spinner);
 
 	mSecurityInfoList = new ArrayList<SecurityInfo>();
-	mArrayAdapter = new SecurityInfoArrayAdapter(this, android.R.id.text1, mSecurityInfoList);
+	mArrayAdapter = new SecurityInfoArrayAdapter(this, R.layout.summary_entry, mSecurityInfoList);
 	mListView.setAdapter(mArrayAdapter);
 	
 	mBackgroundHolder = (RelativeLayout) findViewById(R.id.summary_background);
